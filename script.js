@@ -337,6 +337,19 @@ async function handleViewUpdate(videoId) {
     }
 }
 
+   import { useEffect } from "react";
+import { supabase } from "../lib/supabaseClient";
+
+export default function Home() {
+  useEffect(() => {
+    supabase.from("visitas").insert([
+      { created_at: new Date() }
+    ]);
+  }, []);
+
+  return <div>Meu site</div>;
+}
+   
 /* =========================
    LOAD FAN MESSAGES (STRICT FILTER & LIMIT)
 ========================= */
