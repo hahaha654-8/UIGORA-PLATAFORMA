@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Desafio do Sol | QUIMERHAA18-4-9</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* =========================
+   DESAFIO DO SOL PAGE
+========================= */
+
+body {
+    padding-top: 20px;
+}
+
+.desafio-header {
+    text-align: center;
+    padding: 0 20px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.desafio-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 45px 0 5px; /* Margem superior para o botão não sobrepor */
+    background: linear-gradient(90deg,#fff,#7c4dff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.desafio-subtitle {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+/* Futuristic Countdown Styles */
+.sun-challenge-countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 10px auto 25px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    max-width: fit-content;
+    backdrop-filter: blur(10px);
+}
+
+.sun-unit {
+    text-align: center;
+}
+
+.sun-number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #ffd700; /* Dourado para destacar */
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px 12px;
+    border-radius: 6px;
+    min-width: 50px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.sun-unit span {
+    display: block;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 5px;
+    color: #aaa;
+}
+
+.sun-sep {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.3);
+    margin-top: -15px;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+    gap: 12px;
+    padding: 10px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.video-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+    border-color: #7c4dff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+.video-card video {
+    width: 100%;
+    aspect-ratio: 9/16;
+    object-fit: cover;
+    background: #000;
+    display: block;
+}
+
+.video-info {
+    padding: 12px;
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Ajuste das views - Estilo Original no Topo */
+.views-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 30;
+    background: rgba(0,0,0,0.7);
+    padding: 4px 12px;
+    border-radius: 30px; /* Estilo arredondado original */
+    font-size: 11px;
+    font-weight: 700;
+    color: #00ffe1; /* Cor ciana original */
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(0,255,225,0.2);
+    white-space: nowrap;
+}
+
+/* Ranking Badges - Modern Cyber Style */
+.rank-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 20;
+    padding: 4px 14px;
+    border-radius: 4px; /* Cantos mais retos para ar futurista */
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-left: 3px solid #fff;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.rank-1 { 
+    background: rgba(255, 215, 0, 0.15);
+    border-color: #ffd700;
+    color: #ffd700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), inset 0 0 10px rgba(255, 215, 0, 0.2);
+    animation: neonPulseGold 2s infinite alternate;
+}
+
+.rank-2 { 
+    background: rgba(0, 255, 225, 0.15);
+    border-color: #00ffe1;
+    color: #00ffe1;
+    box-shadow: 0 0 20px rgba(0, 255, 225, 0.3), inset 0 0 10px rgba(0, 255, 225, 0.2);
+}
+
+.rank-3 { 
+    background: rgba(255, 77, 243, 0.15);
+    border-color: #ff4df3;
+    color: #ff4df3;
+    box-shadow: 0 0 20px rgba(255, 77, 243, 0.3), inset 0 0 10px rgba(255, 77, 243, 0.2);
+}
+
+.rank-other {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    opacity: 0.8;
+}
+
+@keyframes neonPulseGold {
+    from { box-shadow: 0 0 15px rgba(255, 215, 0, 0.2); }
+    to { box-shadow: 0 0 30px rgba(255, 215, 0, 0.5); }
+}
+
+/* Ajuste das views para casar com o tema */
+.views-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
+    background: rgba(0,0,0,0.8);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.1);
+    letter-spacing: 1px;
+    width: auto; /* Garante que a largura se ajuste ao texto */
+    white-space: nowrap; /* Impede que o texto quebre linha */
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.back-btn {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    z-index: 100;
+    padding: 8px 15px;
+    background: rgba(124, 77, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(124, 77, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 11px;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #7c4dff;
+}
+
+@media (max-width: 480px) {
+    .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 10px;
+    }
+    .desafio-title { font-size: 1.8rem; }
+}
+</style>
+
+</head>
+
+<body>
+
+<header class="desafio-header">
+    <a href="index.html" class="back-btn">← Voltar</a>
+    <h1 class="desafio-title">Desafio do Sol 5000kzs disponiveis </h1>
+    <p class="desafio-subtitle">Os melhores vídeos do universo QUIMERHAA18-4-9</p>
+
+    <!-- CARD DO DESAFIO (COMPACTO) -->
+    <div class="challenge-brief" style="max-width: 700px; margin: 10px auto; padding: 15px; background: rgba(124, 77, 255, 0.05); border: 1px solid rgba(124, 77, 255, 0.2); border-radius: 12px; backdrop-filter: blur(15px); text-align: left; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: var(--accent-glow); filter: blur(80px); opacity: 0.15; pointer-events: none;"></div>
+        
+        <h2 style="font-size: 0.9rem; color: #fff; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; border-left: 3px solid #00ffe1; padding-left: 12px;">Protocolo de Ativação do Desafio do Sol</h2>
+        
+        <p style="color: #ccc; font-size: 0.85rem; line-height: 1.5; margin-bottom: 15px;">
+            "Cartas para o Sol" é sobre a urgência de viver. <b>Se tivesses que escrever uma carta para o sol hoje, o que dirias?</b><br>
+            <small style="color: var(--accent-warm); font-weight: 700; font-size: 0.75rem;">⚠ Duração: 20 dias. Vencedores anunciados após o término.</small>
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
+            <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px;">
+                <span style="color: #7c4dff; font-weight: 800; font-size: 0.7rem; display: block; margin-bottom: 3px;">01. O REGISTRO</span>
+                <p style="font-size: 0.75rem; color: #aaa;">Grave um vídeo respondendo à pergunta.</p>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px;">
+                <span style="color: #00ffe1; font-weight: 800; font-size: 0.7rem; display: block; margin-bottom: 3px;">02. A ATIVAÇÃO</span>
+                <p style="font-size: 0.75rem; color: #aaa;">Ative com a cota de <b>500 Kz</b>.</p>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px;">
+                <span style="color: #ffd700; font-weight: 800; font-size: 0.7rem; display: block; margin-bottom: 3px;">03. A GLÓRIA</span>
+                <p style="font-size: 0.75rem; color: #aaa;">TOP 3 ganham <b>Prêmios em Dinheiro</b>.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 15px; text-align: center;">
+            <a href="index.html#fans" class="btn btn-primary" style="margin: 0; width: auto; font-weight: 700; padding: 8px 30px; font-size: 0.7rem;">ACEITAR DESAFIO</a>
+        </div>
+    </div>
+
+    <!-- NOVO COUNTDOWN DO DESAFIO -->
+    <div class="sun-challenge-countdown" id="main-countdown" data-end="2026-05-21T23:59:59">
+        <div class="sun-unit">
+            <div id="days" class="sun-number">00</div>
+            <span>Dias</span>
+        </div>
+        <div class="sun-sep">:</div>
+        <div class="sun-unit">
+            <div id="hours" class="sun-number">00</div>
+            <span>Horas</span>
+        </div>
+        <div class="sun-sep">:</div>
+        <div class="sun-unit">
+            <div id="minutes" class="sun-number">00</div>
+            <span>Min</span>
+        </div>
+        <div class="sun-sep">:</div>
+        <div class="sun-unit">
+            <div id="seconds" class="sun-number">00</div>
+            <span>Seg</span>
+        </div>
+    </div>
+</header>
+
+<section class="video-grid" id="desafio-grid">
+<!-- vídeos entram aqui -->
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script>
+const db = supabase.createClient(
+"https://ojozfdqatllpodvmqhor.supabase.co",
+"sb_publishable_CEA4LYluZrICBfHAkgwH0A_UyC6GQOf"
+);
+
+async function loadDesafioVideos(){
+
+const { data } = await db
+.from("fan_messages")
+.select("*")
+.order("views",{ascending:false})
+.limit(100);
+
+const grid = document.getElementById("desafio-grid");
+grid.innerHTML = "";
+
+data.forEach((v, index) => {
+    // Filtro básico de URL
+    if (!v.video_url || !v.video_url.startsWith("http")) return;
+
+    const card = document.createElement("div");
+    card.className="video-card";
+    
+    // Ranking imediato baseado na ordem da DB (que já vem ordenada por views)
+    const pos = index + 1;
+    let rankClass = "rank-other";
+    let rankText = `#${pos < 10 ? '0'+pos : pos}`;
+    
+    if (pos === 1) { rankClass = "rank-1"; rankText = "<span>TOP</span> 01"; }
+    else if (pos === 2) { rankClass = "rank-2"; rankText = "<span>TOP</span> 02"; }
+    else if (pos === 3) { rankClass = "rank-3"; rankText = "<span>TOP</span> 03"; }
+
+    card.innerHTML=`
+        <div class="rank-badge ${rankClass}">${rankText}</div>
+        <div class="views-badge" id="view-count-${v.id}">👁 ${v.views || 0} views</div>
+
+        <video class="fan-video" muted playsinline controls data-id="${v.id}" 
+            preload="none" 
+            poster="https://ojozfdqatllpodvmqhor.supabase.co/storage/v1/object/public/assets/video-placeholder.jpg"
+            onerror="this.closest('.video-card').remove();">
+        <source src="${v.video_url}">
+        </video>
+
+        <div class="video-info">
+        @${v.name || 'anonimo'}
+        </div>
+    `;
+
+    grid.appendChild(card);
+    
+    // Animação de entrada suave
+    setTimeout(() => {
+        card.style.opacity = "1";
+    }, 100 * (index % 10)); // Efeito cascata
+});
+
+// Observer para carregar os vídeos conforme o scroll
+const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const video = entry.target;
+            video.preload = "metadata"; 
+            videoObserver.unobserve(video);
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fan-video').forEach(v => videoObserver.observe(v));
+
+if (typeof observeVideoViews === 'function') {
+    observeVideoViews();
+}
+
+}
+
+loadDesafioVideos();
+
+function observeVideoViews() {
+    const videos = document.querySelectorAll(".fan-video");
+    videos.forEach((video) => {
+        let lastPosition = 0;
+        let viewCounted = false;
+        let watchTimeStarted = false;
+
+        video.addEventListener("play", () => {
+            const videoId = video.dataset.id;
+            const lastView = localStorage.getItem("yt_view_" + videoId);
+            const now = Date.now();
+            if (lastView && (now - lastView) < (60 * 60 * 1000)) {
+                viewCounted = true; 
+                return;
+            }
+            watchTimeStarted = true;
+        });
+
+        video.addEventListener("timeupdate", () => {
+            if (viewCounted || !watchTimeStarted) return;
+            if (video.currentTime - lastPosition > 3.0) {
+                watchTimeStarted = false;
+                return;
+            }
+            lastPosition = video.currentTime;
+            const requiredTime = Math.min(15, video.duration * 0.3);
+            if (video.currentTime >= requiredTime && !viewCounted) {
+                viewCounted = true;
+                handleViewUpdate(video.dataset.id);
+            }
+        });
+
+        video.addEventListener("ended", () => {
+            if (!viewCounted && watchTimeStarted) {
+                viewCounted = true;
+                handleViewUpdate(video.dataset.id);
+            }
+        });
+    });
+}
+
+async function handleViewUpdate(videoId) {
+    localStorage.setItem("yt_view_" + videoId, Date.now());
+    try {
+        // Tenta usar RPC primeiro (mais rápido/seguro)
+        const { error } = await db.rpc('increment_video_views', { video_id: videoId });
+        
+        if (error) {
+            // Fallback se a RPC não existir
+            const { data: row } = await db.from("fan_messages").select("views").eq("id", videoId).maybeSingle();
+            if (row) {
+                const newTotal = (row.views || 0) + 1;
+                await db.from("fan_messages").update({ views: newTotal }).eq("id", videoId);
+                const display = document.getElementById(`view-count-${videoId}`);
+                if (display) display.innerHTML = `👁 ${newTotal} views`;
+            }
+        } else {
+            // Atualiza interface se a RPC funcionou
+            const display = document.getElementById(`view-count-${videoId}`);
+            if (display) {
+                const currentViews = parseInt(display.innerText.replace(/[^0-9]/g, "")) || 0;
+                display.innerHTML = `👁 ${currentViews + 1} views`;
+            }
+        }
+    } catch (e) {
+        console.error("Erro ao atualizar views:", e);
+    }
+}
+
+/* =========================
+   COUNTDOWN LOGIC (30 DAYS)
+========================= */
+
+function startCountdown() {
+    const countdownEl = document.getElementById('main-countdown');
+    if (!countdownEl) return;
+
+    // Calcular 30 dias a partir de agora se necessário, ou usar a data fixa
+    // Para garantir exatos 30 dias a partir de 21 de Abril:
+    const targetDate = new Date("2026-05-21T23:59:59").getTime();
+
+    function update() {
+        const now = new Date().getTime();
+        const gap = targetDate - now;
+
+        if (gap <= 0) {
+            countdownEl.innerHTML = "<div class='sun-number' style='width:100%;'>DESAFIO ENCERRADO</div>";
+            return;
+        }
+
+        const d = Math.floor(gap / (1000 * 60 * 60 * 24));
+        const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((gap % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = String(d).padStart(2, '0');
+        document.getElementById('hours').innerText = String(h).padStart(2, '0');
+        document.getElementById('minutes').innerText = String(m).padStart(2, '0');
+        document.getElementById('seconds').innerText = String(s).padStart(2, '0');
+    }
+
+    update();
+    setInterval(update, 1000);
+}
+
+startCountdown();
+</script>
+
+</body>
+</html>
